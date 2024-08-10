@@ -5,6 +5,13 @@ extends CharacterBody2D
 @onready var switchtimer = $switchtimer
 @onready var anim = $AnimatedSprite2D
 @onready var timerlabel = $timerlabel
+@onready var leftbox = $leftbox/CollisionShape2D
+@onready var rightbox = $rightbox/CollisionShape2D
+@onready var upbox = $upbox/CollisionShape2D
+@onready var downbox = $downbox/CollisionShape2D
+@onready var attacktimer = $attacktimer
+@onready var light = preload("res://light.tscn")
+@onready var dark = $dark
 
 
 const smallspeed = 600
@@ -22,9 +29,15 @@ var cantp = true
 var tpx = 0
 var tpy = 0
 var direction = 1
+var attacking = false
+
 
 func _ready():
 	smallswitch()
+	leftbox.disabled = true
+	rightbox.disabled = true
+	upbox.disabled = true
+	downbox.disabled = true
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -66,7 +79,7 @@ func smallrun():
 			velocity.y = move_toward(velocity.y,0,50)
 
 func bigrun():
-	if bored:
+	if not attacking:
 		
 		if Input.is_action_pressed('ui_right'):
 			direction = right
@@ -109,9 +122,52 @@ func teleport():
 		cantp = true
 
 func attack():
-	pass
+	if Input.is_action_pressed("ui_accept") and not attacking:
+		attacking = true
+		velocity.y = move_toward(velocity.y,0,100)
+		velocity.x = move_toward(velocity.x,0,100)
+		if Input.is_action_pressed("ui_down"):
+			anim.play("attack down")
+			attacktimer.start()
+			await attacktimer.timeout
+			downbox.disabled = false
+			await anim.animation_finished
+			downbox.disabled = true
+			attacking = false
+		elif Input.is_action_pressed("ui_up"):
+			anim.play("attack up")
+			attacktimer.start()
+			await attacktimer.timeout
+			upbox.disabled = false
+			await anim.animation_finished
+			upbox.disabled = true
+			attacking = false
+		else:
+			if direction == left:
+				anim.play("attack forward")
+				anim.flip_h = true
+				attacktimer.start()
+				await attacktimer.timeout
+				leftbox.disabled = false
+				await anim.animation_finished
+				leftbox.disabled = true
+				attacking = false
+			else:
+				anim.play("attack forward")
+				anim.flip_h = false
+				attacktimer.start()
+				await attacktimer.timeout
+				rightbox.disabled = false
+				await anim.animation_finished
+				rightbox.disabled = true
+				attacking = false
+		
 
 func smallswitch():
+	dark.show()
+	var sun = get_tree().get_first_node_in_group('light')
+	if sun:
+		sun.queue_free()
 	small = true
 	var timesmall = randi_range(2,5)
 	switchtimer.start(timesmall)
@@ -120,6 +176,9 @@ func smallswitch():
 
 
 func bigswitch():
+	var inst = light.instantiate()
+	add_sibling(inst)
+	dark.hide()
 	small = false
 	var timebig = randi_range(2,5)
 	switchtimer.start(timebig)
@@ -133,24 +192,26 @@ func getflip():
 		anim.flip_h = true
 
 func animations():
-	if small:
-		if velocity.x != 0:
-			anim.play("run small")
-			getflip()
-		elif velocity.y != 0:
-			anim.play("run small")
+	if not attacking:
+		
+		if small:
+			if velocity.x != 0:
+				anim.play("run small")
+				getflip()
+			elif velocity.y != 0:
+				anim.play("run small")
+			else:
+				anim.play("idle little")
+				getflip()
 		else:
-			anim.play("idle little")
-			getflip()
-	else:
-		if velocity.x != 0:
-			anim.play("run big")
-			getflip()
-		elif velocity.y != 0:
-			anim.play("run big")
-		else:
-			anim.play("idle big")
-			getflip()
+			if velocity.x != 0:
+				anim.play("run big")
+				getflip()
+			elif velocity.y != 0:
+				anim.play("run big")
+			else:
+				anim.play("idle big")
+				getflip()
 
 
 func timercount():

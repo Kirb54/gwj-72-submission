@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://fegnd7tevtpj"]
+
+[sub_resource type="Environment" id="Environment_btd64"]
+background_mode = 3
+tonemap_mode = 3
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 1.06
+glow_bloom = 0.35
+glow_blend_mode = 0
+
+[node name="light" type="WorldEnvironment" groups=["light"]]
+environment = SubResource("Environment_btd64")

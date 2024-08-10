@@ -1,9 +1,10 @@
-[gd_scene load_steps=49 format=3 uid="uid://b8prtbg5hpak"]
+[gd_scene load_steps=54 format=3 uid="uid://b8prtbg5hpak"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_yx62l"]
 [ext_resource type="Texture2D" uid="uid://bd24x7746xmqd" path="res://assets/Warrior_Purple.png" id="2_q0uw1"]
 [ext_resource type="Texture2D" uid="uid://dcp8bsghk8qi6" path="res://assets/Pawn_Purple.png" id="3_mg2r7"]
 [ext_resource type="FontFile" uid="uid://dpll3nki08syl" path="res://assets/PublicPixel.ttf" id="4_tlsip"]
+[ext_resource type="PackedScene" uid="uid://7c1al3bd3se1" path="res://dark.tscn" id="5_4id7p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s5jy3"]
 atlas = ExtResource("2_q0uw1")
@@ -194,7 +195,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_d2l3o")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack down",
 "speed": 10.0
 }, {
@@ -217,7 +218,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_54pmc")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack forward",
 "speed": 10.0
 }, {
@@ -240,7 +241,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rl31u")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack up",
 "speed": 10.0
 }, {
@@ -340,6 +341,18 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_82wwh"]
 size = Vector2(54, 50)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w6fsn"]
+size = Vector2(114, 57)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ax8ur"]
+size = Vector2(134, 66.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2x1ni"]
+size = Vector2(62, 114)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_il5p5"]
+size = Vector2(66, 114)
+
 [node name="player" type="CharacterBody2D"]
 texture_filter = 1
 script = ExtResource("1_yx62l")
@@ -354,8 +367,7 @@ horizontal_alignment = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_q5xrw")
-animation = &"idle little"
-frame_progress = 0.411451
+animation = &"attack up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
@@ -371,3 +383,33 @@ position_smoothing_speed = 10.0
 
 [node name="switchtimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="downbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="downbox"]
+position = Vector2(4, 53.5)
+shape = SubResource("RectangleShape2D_w6fsn")
+
+[node name="upbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="upbox"]
+position = Vector2(0, -44.75)
+shape = SubResource("RectangleShape2D_ax8ur")
+
+[node name="leftbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="leftbox"]
+position = Vector2(-57, -15)
+shape = SubResource("RectangleShape2D_2x1ni")
+
+[node name="rightbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="rightbox"]
+position = Vector2(56, -15)
+shape = SubResource("RectangleShape2D_il5p5")
+
+[node name="attacktimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="dark" parent="." instance=ExtResource("5_4id7p")]
