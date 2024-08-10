@@ -33,7 +33,8 @@ var attacking = false
 
 
 func _ready():
-	smallswitch()
+	#smallswitch()
+	dark.hide()
 	leftbox.disabled = true
 	rightbox.disabled = true
 	upbox.disabled = true

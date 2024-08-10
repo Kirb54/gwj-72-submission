@@ -353,7 +353,7 @@ size = Vector2(62, 114)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_il5p5"]
 size = Vector2(66, 114)
 
-[node name="player" type="CharacterBody2D"]
+[node name="player" type="CharacterBody2D" groups=["player"]]
 texture_filter = 1
 script = ExtResource("1_yx62l")
 
