@@ -285,7 +285,6 @@ script = ExtResource("1_62t2h")
 sprite_frames = SubResource("SpriteFrames_nk101")
 animation = &"attack forward"
 frame = 3
-flip_h = true
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 texture = SubResource("GradientTexture2D_w4g58")
@@ -326,4 +325,12 @@ one_shot = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="sight"]
 shape = SubResource("CircleShape2D_3ntl6")
 
+[node name="attackstartup" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="body_entered" from="downbox" to="." method="_on_downbox_body_entered"]
+[connection signal="body_entered" from="rightbox" to="." method="_on_rightbox_body_entered"]
+[connection signal="body_entered" from="upbox" to="." method="_on_upbox_body_entered"]
+[connection signal="body_entered" from="leftbox" to="." method="_on_leftbox_body_entered"]
 [connection signal="body_entered" from="sight" to="." method="_on_sight_body_entered"]

@@ -221,3 +221,8 @@ func timercount():
 		timerlabel.add_theme_color_override("font_color","WHITE")
 	else:
 		timerlabel.add_theme_color_override("font_color","BlACK")
+
+
+
+func hit():
+	print('ouch')
