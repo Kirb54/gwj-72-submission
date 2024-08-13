@@ -329,8 +329,16 @@ shape = SubResource("CircleShape2D_3ntl6")
 wait_time = 0.3
 one_shot = true
 
+[node name="knockedtimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="body_entered" from="downbox" to="." method="_on_downbox_body_entered"]
+[connection signal="body_exited" from="downbox" to="." method="_on_downbox_body_exited"]
 [connection signal="body_entered" from="rightbox" to="." method="_on_rightbox_body_entered"]
+[connection signal="body_exited" from="rightbox" to="." method="_on_rightbox_body_exited"]
 [connection signal="body_entered" from="upbox" to="." method="_on_upbox_body_entered"]
+[connection signal="body_exited" from="upbox" to="." method="_on_upbox_body_exited"]
 [connection signal="body_entered" from="leftbox" to="." method="_on_leftbox_body_entered"]
+[connection signal="body_exited" from="leftbox" to="." method="_on_leftbox_body_exited"]
 [connection signal="body_entered" from="sight" to="." method="_on_sight_body_entered"]

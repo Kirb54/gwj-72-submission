@@ -12,6 +12,9 @@ extends CharacterBody2D
 @onready var attacktimer = $attacktimer
 @onready var light = preload("res://light.tscn")
 @onready var dark = $dark
+@onready var timefreeze = $timefreeze
+@onready var cam = $Camera2D
+
 
 
 const smallspeed = 600
@@ -21,10 +24,12 @@ const right = 1
 const up = -1
 const down = 1
 const tpdistance = 100
+const scstrong = 5
+
 
 var notdead = false
 var bored = true
-var small = true
+var small = false
 var cantp = true
 var tpx = 0
 var tpy = 0
@@ -53,6 +58,7 @@ func _process(delta):
 			attack()
 		animations()
 		timercount()
+		screenshake()
 	
 	move_and_slide()
 
@@ -226,3 +232,38 @@ func timercount():
 
 func hit():
 	print('ouch')
+
+
+func _on_downbox_body_entered(body):
+	if body.is_in_group('enemy'):
+		body.hit(self)
+
+
+func _on_upbox_body_entered(body):
+	if body.is_in_group('enemy'):
+		body.hit(self)
+
+
+func _on_leftbox_body_entered(body):
+	if body.is_in_group('enemy'):
+		body.hit(self)
+
+
+func _on_rightbox_body_entered(body):
+	if body.is_in_group('enemy'):
+		body.hit(self)
+
+func hitsomething():
+	Engine.time_scale = .5
+	timefreeze.start()
+	await timefreeze.timeout
+	Engine.time_scale = 1
+	cam.offset = Vector2(0,0)
+
+
+
+func screenshake():
+	if timefreeze.time_left != 0:
+		var x = randf_range(-scstrong,scstrong)
+		var y = randf_range(-scstrong,scstrong)
+		cam.offset = Vector2(x,y)

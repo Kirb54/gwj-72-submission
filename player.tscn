@@ -385,24 +385,32 @@ position_smoothing_speed = 10.0
 one_shot = true
 
 [node name="downbox" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="downbox"]
 position = Vector2(4, 53.5)
 shape = SubResource("RectangleShape2D_w6fsn")
 
 [node name="upbox" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="upbox"]
 position = Vector2(0, -44.75)
 shape = SubResource("RectangleShape2D_ax8ur")
 
 [node name="leftbox" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="leftbox"]
 position = Vector2(-57, -15)
 shape = SubResource("RectangleShape2D_2x1ni")
 
 [node name="rightbox" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="rightbox"]
 position = Vector2(56, -15)
@@ -413,3 +421,12 @@ wait_time = 0.1
 one_shot = true
 
 [node name="dark" parent="." instance=ExtResource("5_4id7p")]
+
+[node name="timefreeze" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="body_entered" from="downbox" to="." method="_on_downbox_body_entered"]
+[connection signal="body_entered" from="upbox" to="." method="_on_upbox_body_entered"]
+[connection signal="body_entered" from="leftbox" to="." method="_on_leftbox_body_entered"]
+[connection signal="body_entered" from="rightbox" to="." method="_on_rightbox_body_entered"]
