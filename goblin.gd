@@ -8,7 +8,7 @@ extends CharacterBody2D
 @onready var aimlesstimer = $aimlesstimer
 @onready var attackstartup = $attackstartup
 @onready var knockedtimer = $knockedtimer
-
+@onready var light = $PointLight2D
 
 
 const speed = 500
@@ -38,6 +38,7 @@ func _process(delta):
 	else:
 		findplayer()
 	animations()
+	flash()
 	move_and_slide()
 
 
@@ -93,8 +94,9 @@ func _on_rightbox_body_entered(body):
 
 func _on_upbox_body_entered(body):
 	if body.is_in_group('player'):
-		anim.play("attack up")
+		
 		if not attacking:
+			anim.play("attack up")
 			hitplayerup = true
 			attacking = true
 			attack(upbox,body)
@@ -122,22 +124,24 @@ func attack(attackbox,p):
 		if not knocked:
 			if attackbox == downbox:
 				if hitplayerdown:
-					p.hit()
+					p.hit(self)
 			elif attackbox == upbox:
 				if hitplayerup:
-					p.hit()
+					p.hit(self)
 			elif attackbox == leftbox:
 				if hitplayerleft:
-					p.hit()
+					p.hit(self)
 			elif attackbox == rightbox:
 				if hitplayerright:
-					p.hit()
+					p.hit(self)
+		else:
+			return
 		await anim.animation_finished or knocked
 		attacking = false
 	
 
 func animations():
-	if not attacking or not knocked:
+	if not attacking and not knocked:
 		if velocity.x > 0:
 			anim.play("run")
 			anim.flip_h = false
@@ -188,8 +192,22 @@ func hit(p):
 	await knockedtimer.timeout
 	knocked = false
 	attacking = false
+	anim.show()
+	light.show()
 	velocity.x = move_toward(velocity.x,0,100)
 	velocity.y = move_toward(velocity.y,0,100)
 	
 	if health <= 0:
 		self.queue_free()
+
+
+
+func flash():
+	if knockedtimer.time_left != 0:
+		var rand = randi_range(0,1)
+		if rand == 0:
+			anim.hide()
+			light.hide()
+		else:
+			anim.show()
+			light.show()

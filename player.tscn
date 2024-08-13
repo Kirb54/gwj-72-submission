@@ -426,6 +426,10 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
+[node name="knockedtimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
 [connection signal="body_entered" from="downbox" to="." method="_on_downbox_body_entered"]
 [connection signal="body_entered" from="upbox" to="." method="_on_upbox_body_entered"]
 [connection signal="body_entered" from="leftbox" to="." method="_on_leftbox_body_entered"]

@@ -14,7 +14,7 @@ extends CharacterBody2D
 @onready var dark = $dark
 @onready var timefreeze = $timefreeze
 @onready var cam = $Camera2D
-
+@onready var knockedtimer = $knockedtimer
 
 
 const smallspeed = 600
@@ -25,6 +25,8 @@ const up = -1
 const down = 1
 const tpdistance = 100
 const scstrong = 5
+const knockstr = 500
+
 
 
 var notdead = false
@@ -35,6 +37,7 @@ var tpx = 0
 var tpy = 0
 var direction = 1
 var attacking = false
+var knocked = false
 
 
 func _ready():
@@ -86,7 +89,7 @@ func smallrun():
 			velocity.y = move_toward(velocity.y,0,50)
 
 func bigrun():
-	if not attacking:
+	if not attacking or not knocked:
 		
 		if Input.is_action_pressed('ui_right'):
 			direction = right
@@ -129,7 +132,7 @@ func teleport():
 		cantp = true
 
 func attack():
-	if Input.is_action_pressed("ui_accept") and not attacking:
+	if Input.is_action_pressed("ui_accept") and not attacking and not knocked:
 		attacking = true
 		velocity.y = move_toward(velocity.y,0,100)
 		velocity.x = move_toward(velocity.x,0,100)
@@ -230,8 +233,22 @@ func timercount():
 
 
 
-func hit():
-	print('ouch')
+func hit(e):
+	if not knocked:
+		Engine.time_scale = .5
+		timefreeze.start()
+		await timefreeze.timeout
+		var diffrence = Vector2(e.global_position.x+global_position.x,e.global_position.y+global_position.y)
+		var mathdif : Vector2
+		mathdif = abs(diffrence)
+		var findratio = mathdif.x + mathdif.y
+		var ratio = knockstr/findratio
+		velocity.x = ratio * diffrence.x
+		velocity.y = ratio * diffrence.y
+		knocked = true
+		knockedtimer.start()
+		await knockedtimer.timeout
+		knocked = false
 
 
 func _on_downbox_body_entered(body):
