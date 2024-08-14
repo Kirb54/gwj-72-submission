@@ -31,7 +31,7 @@ const knockstr = 500
 
 var notdead = false
 var bored = true
-var small = false
+var small = true
 var cantp = true
 var tpx = 0
 var tpy = 0

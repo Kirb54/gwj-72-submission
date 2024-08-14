@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b8prtbg5hpak" path="res://player.tscn" id="1_f5s3f"]
 [ext_resource type="PackedScene" uid="uid://k7wlfgeyghcd" path="res://tilesheet.tscn" id="1_gtq0b"]
-[ext_resource type="PackedScene" uid="uid://bvt2g632wjhdf" path="res://goblin.tscn" id="3_ir5fy"]
+[ext_resource type="PackedScene" uid="uid://dd7221u0o4mpx" path="res://tntlin.tscn" id="3_ithad"]
 
 [node name="test lvl" type="Node2D"]
 
@@ -12,5 +12,5 @@ layer_0/tile_data = PackedInt32Array(0, 65536, 1, 65536, 65536, 2, 131072, 65536
 [node name="player" parent="." instance=ExtResource("1_f5s3f")]
 position = Vector2(406, 327)
 
-[node name="goblin" parent="." instance=ExtResource("3_ir5fy")]
-position = Vector2(704, 342)
+[node name="tntlin" parent="." instance=ExtResource("3_ithad")]
+position = Vector2(838, 348)

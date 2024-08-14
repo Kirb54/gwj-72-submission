@@ -51,7 +51,6 @@ func followplayer():
 		var ratio = speed/findratio
 		velocity.x = move_toward(velocity.x, ratio * diffrence.x, 100)
 		velocity.y = move_toward(velocity.y, ratio * diffrence.y, 100)
-		print(velocity)
 
 
 func findplayer():
