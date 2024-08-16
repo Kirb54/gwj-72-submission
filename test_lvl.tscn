@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bea3338r25ab6"]
+[gd_scene load_steps=5 format=3 uid="uid://bea3338r25ab6"]
 
 [ext_resource type="PackedScene" uid="uid://b8prtbg5hpak" path="res://player.tscn" id="1_f5s3f"]
 [ext_resource type="PackedScene" uid="uid://k7wlfgeyghcd" path="res://tilesheet.tscn" id="1_gtq0b"]
 [ext_resource type="PackedScene" uid="uid://dd7221u0o4mpx" path="res://tntlin.tscn" id="3_ithad"]
+[ext_resource type="PackedScene" uid="uid://bvt2g632wjhdf" path="res://goblin.tscn" id="4_prwp4"]
 
 [node name="test lvl" type="Node2D"]
 
@@ -14,3 +15,6 @@ position = Vector2(406, 327)
 
 [node name="tntlin" parent="." instance=ExtResource("3_ithad")]
 position = Vector2(838, 348)
+
+[node name="goblin" parent="." instance=ExtResource("4_prwp4")]
+position = Vector2(888, 444)
