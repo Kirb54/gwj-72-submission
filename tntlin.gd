@@ -33,6 +33,7 @@ func _process(delta):
 	else:
 		findplayer()
 	
+	animations()
 	
 	move_and_slide()
 
@@ -52,7 +53,9 @@ func follow():
 
 func attack():
 	if nearcount >= 15:
-		print('close')
+		attacking = true
+		anim.play("blowup")
+		
 
 func checknear():
 	if near:
@@ -88,3 +91,16 @@ func _on_neardetect_body_entered(body):
 func _on_neardetect_body_exited(body):
 	if body.is_in_group('player'):
 		near = false
+
+
+
+func animations():
+	if not attacking:
+		if velocity.x != 0:
+			anim.play('run')
+			if velocity.x > 0:
+				anim.flip_h = false
+			else:
+				anim.flip_h = true
+		else:
+			anim.play('idle')
