@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://b8prtbg5hpak"]
+[gd_scene load_steps=55 format=3 uid="uid://b8prtbg5hpak"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_yx62l"]
 [ext_resource type="Texture2D" uid="uid://bd24x7746xmqd" path="res://assets/Warrior_Purple.png" id="2_q0uw1"]
@@ -353,8 +353,13 @@ size = Vector2(62, 114)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_il5p5"]
 size = Vector2(66, 114)
 
+[sub_resource type="Curve" id="Curve_06u2v"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [node name="player" type="CharacterBody2D" groups=["player"]]
 texture_filter = 1
+scale = Vector2(0.6, 0.6)
 script = ExtResource("1_yx62l")
 
 [node name="timerlabel" type="Label" parent="."]
@@ -421,6 +426,7 @@ wait_time = 0.1
 one_shot = true
 
 [node name="dark" parent="." instance=ExtResource("5_4id7p")]
+visible = false
 
 [node name="timefreeze" type="Timer" parent="."]
 wait_time = 0.1
@@ -429,6 +435,21 @@ one_shot = true
 [node name="knockedtimer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
+
+[node name="switchparticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 24
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(0, -1)
+gravity = Vector2(0, 300)
+initial_velocity_min = 150.0
+initial_velocity_max = 150.0
+scale_amount_min = 10.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_06u2v")
+color = Color(0.2, 0, 0.32549, 1)
 
 [connection signal="body_entered" from="downbox" to="." method="_on_downbox_body_entered"]
 [connection signal="body_entered" from="upbox" to="." method="_on_upbox_body_entered"]

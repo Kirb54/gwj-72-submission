@@ -15,6 +15,8 @@ extends CharacterBody2D
 @onready var timefreeze = $timefreeze
 @onready var cam = $Camera2D
 @onready var knockedtimer = $knockedtimer
+@onready var switchpart = $switchparticles
+
 
 
 const smallspeed = 600
@@ -41,8 +43,7 @@ var knocked = false
 
 
 func _ready():
-	#smallswitch()
-	dark.hide()
+	smallswitch()
 	leftbox.disabled = true
 	rightbox.disabled = true
 	upbox.disabled = true
@@ -175,6 +176,7 @@ func attack():
 
 func smallswitch():
 	dark.show()
+	switchpart.emitting = true
 	var sun = get_tree().get_first_node_in_group('light')
 	if sun:
 		sun.queue_free()
@@ -186,6 +188,7 @@ func smallswitch():
 
 
 func bigswitch():
+	switchpart.emitting = true
 	var inst = light.instantiate()
 	add_sibling(inst)
 	dark.hide()
@@ -249,6 +252,7 @@ func hit(e):
 		knockedtimer.start()
 		await knockedtimer.timeout
 		knocked = false
+		print('hurt')
 
 
 func _on_downbox_body_entered(body):

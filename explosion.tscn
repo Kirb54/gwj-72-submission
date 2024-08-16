@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://blobdj6c266ph"]
+
+[ext_resource type="Script" path="res://explosion.gd" id="1_e5b0m"]
+
+[sub_resource type="Curve" id="Curve_2kju1"]
+_data = [Vector2(0.0168539, 1), 0.0, 0.0, 0, 0, Vector2(0.831461, 0.725275), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_80xv6"]
+radius = 107.0
+
+[node name="explosion" type="Area2D"]
+script = ExtResource("1_e5b0m")
+
+[node name="explosion" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 32
+lifetime = 1.3
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 100)
+initial_velocity_min = 150.0
+initial_velocity_max = 150.0
+scale_amount_min = 10.0
+scale_amount_max = 20.0
+scale_amount_curve = SubResource("Curve_2kju1")
+hue_variation_min = -0.04
+hue_variation_max = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_80xv6")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="finished" from="explosion" to="." method="_on_explosion_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

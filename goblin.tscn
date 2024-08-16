@@ -248,12 +248,12 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="Gradient" id="Gradient_uwc71"]
+[sub_resource type="Gradient" id="Gradient_30jfi"]
 offsets = PackedFloat32Array(0, 0.662338)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_w4g58"]
-gradient = SubResource("Gradient_uwc71")
+gradient = SubResource("Gradient_30jfi")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
@@ -277,6 +277,7 @@ radius = 507.035
 
 [node name="goblin" type="CharacterBody2D" groups=["enemy"]]
 texture_filter = 1
+scale = Vector2(0.6, 0.6)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_62t2h")
@@ -287,6 +288,7 @@ animation = &"attack forward"
 frame = 3
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(2, 2)
 texture = SubResource("GradientTexture2D_w4g58")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
