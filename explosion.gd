@@ -25,5 +25,7 @@ func _on_explosion_finished():
 
 
 func _on_body_entered(body):
-	if body.is_in_group('player') or body.is_in_group('enemy'):
+	if body.is_in_group('player'):
 		body.hit(self)
+	elif body.is_in_group('enemy'):
+		body.queue_free()

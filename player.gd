@@ -176,6 +176,7 @@ func attack():
 
 func smallswitch():
 	dark.show()
+	cam.zoom = Vector2(1,1)
 	switchpart.emitting = true
 	var sun = get_tree().get_first_node_in_group('light')
 	if sun:
@@ -189,6 +190,7 @@ func smallswitch():
 
 func bigswitch():
 	switchpart.emitting = true
+	cam.zoom = Vector2(2,2)
 	var inst = light.instantiate()
 	add_sibling(inst)
 	dark.hide()
@@ -252,6 +254,7 @@ func hit(e):
 		knockedtimer.start()
 		await knockedtimer.timeout
 		knocked = false
+		Engine.time_scale = 1
 		print('hurt')
 
 

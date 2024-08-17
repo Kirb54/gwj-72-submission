@@ -23,7 +23,7 @@ var hitplayerdown = false
 var hitplayerleft = false
 var hitplayerright = false
 var hitplayerup = false
-var health = 3
+var health = 2
 var knocked = false
 
 

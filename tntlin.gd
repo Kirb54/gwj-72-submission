@@ -20,7 +20,7 @@ var player = null
 var aimless = false
 var near = false
 var nearcount = 0
-var health = 2
+var health = 1
 
 
 func _ready():

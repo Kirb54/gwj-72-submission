@@ -10,6 +10,8 @@ point_count = 3
 radius = 107.0
 
 [node name="explosion" type="Area2D"]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_e5b0m")
 
 [node name="explosion" type="CPUParticles2D" parent="."]
