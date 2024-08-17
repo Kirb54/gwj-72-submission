@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+signal lightswitch
+signal darkswitch
+
 
 @onready var tptimer = $tptimer
 @onready var switchtimer = $switchtimer
@@ -176,13 +179,14 @@ func attack():
 
 func smallswitch():
 	dark.show()
+	darkswitch.emit()
 	cam.zoom = Vector2(1,1)
 	switchpart.emitting = true
 	var sun = get_tree().get_first_node_in_group('light')
 	if sun:
 		sun.queue_free()
 	small = true
-	var timesmall = randi_range(2,5)
+	var timesmall = randi_range(1,3)
 	switchtimer.start(timesmall)
 	await switchtimer.timeout
 	bigswitch()
@@ -190,12 +194,13 @@ func smallswitch():
 
 func bigswitch():
 	switchpart.emitting = true
+	lightswitch.emit()
 	cam.zoom = Vector2(2,2)
 	var inst = light.instantiate()
 	add_sibling(inst)
 	dark.hide()
 	small = false
-	var timebig = randi_range(2,5)
+	var timebig = randi_range(1,3)
 	switchtimer.start(timebig)
 	await switchtimer.timeout
 	smallswitch()
@@ -254,8 +259,8 @@ func hit(e):
 		knockedtimer.start()
 		await knockedtimer.timeout
 		knocked = false
+		gb.health -= 1
 		Engine.time_scale = 1
-		print('hurt')
 
 
 func _on_downbox_body_entered(body):

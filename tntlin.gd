@@ -71,6 +71,7 @@ func attack():
 		var inst = explo.instantiate()
 		inst.global_position = global_position
 		add_sibling(inst)
+		gb.kills += 1
 		self.queue_free()
 		
 
@@ -155,6 +156,7 @@ func hit(p):
 		var inst = explo.instantiate()
 		inst.global_position = global_position
 		add_sibling(inst)
+		gb.kills += 1
 		self.queue_free()
 
 

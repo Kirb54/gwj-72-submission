@@ -342,16 +342,16 @@ animations = [{
 size = Vector2(54, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w6fsn"]
-size = Vector2(114, 57)
+size = Vector2(114, 90)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ax8ur"]
-size = Vector2(134, 66.5)
+size = Vector2(134, 91.8333)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2x1ni"]
-size = Vector2(62, 114)
+size = Vector2(90.6667, 114)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_il5p5"]
-size = Vector2(66, 114)
+size = Vector2(103.667, 114)
 
 [sub_resource type="Curve" id="Curve_06u2v"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -394,7 +394,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="downbox"]
-position = Vector2(4, 53.5)
+position = Vector2(4, 70)
 shape = SubResource("RectangleShape2D_w6fsn")
 
 [node name="upbox" type="Area2D" parent="."]
@@ -402,7 +402,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="upbox"]
-position = Vector2(0, -44.75)
+position = Vector2(0, -57.4167)
 shape = SubResource("RectangleShape2D_ax8ur")
 
 [node name="leftbox" type="Area2D" parent="."]
@@ -410,7 +410,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="leftbox"]
-position = Vector2(-57, -15)
+position = Vector2(-71.3333, -15)
 shape = SubResource("RectangleShape2D_2x1ni")
 
 [node name="rightbox" type="Area2D" parent="."]
@@ -418,7 +418,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="rightbox"]
-position = Vector2(56, -15)
+position = Vector2(74.8333, -15)
 shape = SubResource("RectangleShape2D_il5p5")
 
 [node name="attacktimer" type="Timer" parent="."]

@@ -28,4 +28,5 @@ func _on_body_entered(body):
 	if body.is_in_group('player'):
 		body.hit(self)
 	elif body.is_in_group('enemy'):
+		gb.kills += 1
 		body.queue_free()

@@ -197,6 +197,7 @@ func hit(p):
 	velocity.y = move_toward(velocity.y,0,100)
 	
 	if health <= 0:
+		gb.kills += 1
 		self.queue_free()
 
 

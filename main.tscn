@@ -1,14 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://durkxi6c18xm0"]
+[gd_scene load_steps=7 format=3 uid="uid://durkxi6c18xm0"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_3h44n"]
 [ext_resource type="PackedScene" uid="uid://k7wlfgeyghcd" path="res://tilesheet.tscn" id="1_45ar6"]
 [ext_resource type="PackedScene" uid="uid://b8prtbg5hpak" path="res://player.tscn" id="2_54ph8"]
 [ext_resource type="Texture2D" uid="uid://bdslij32a3l3i" path="res://assets/Water.png" id="4_4svhm"]
+[ext_resource type="Theme" uid="uid://b4ysa4bpqab1j" path="res://default.tres" id="5_vgmgn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ekq0e"]
 size = Vector2(1066, 846)
 
 [node name="main" type="Node2D"]
+texture_filter = 1
 script = ExtResource("1_3h44n")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -45,8 +47,79 @@ offset_left = 554.0
 offset_top = 576.0
 offset_right = 678.0
 offset_bottom = 599.0
+theme = ExtResource("5_vgmgn")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "GET IN BOUNDS"
 
+[node name="health" type="Label" parent="hud"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme = ExtResource("5_vgmgn")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+
+[node name="wavelabel" type="Label" parent="hud"]
+offset_left = 377.0
+offset_top = 12.0
+offset_right = 737.0
+offset_bottom = 42.0
+theme = ExtResource("5_vgmgn")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Next wave in"
+
+[node name="gameended" type="CanvasLayer" parent="."]
+process_mode = 2
+visible = false
+
+[node name="Panel" type="Panel" parent="gameended"]
+offset_left = -47.0
+offset_top = -23.0
+offset_right = 1178.0
+offset_bottom = 691.0
+
+[node name="death" type="Label" parent="gameended"]
+offset_left = 367.0
+offset_top = 28.0
+offset_right = 727.0
+offset_bottom = 87.0
+theme = ExtResource("5_vgmgn")
+theme_override_font_sizes/font_size = 40
+text = "YOU DIED!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="play again" type="Button" parent="gameended"]
+offset_left = 222.0
+offset_top = 311.0
+offset_right = 470.0
+offset_bottom = 401.0
+theme = ExtResource("5_vgmgn")
+text = "Play Again?"
+
+[node name="Quit" type="Button" parent="gameended"]
+offset_left = 511.0
+offset_top = 311.0
+offset_right = 742.0
+offset_bottom = 399.0
+theme = ExtResource("5_vgmgn")
+text = "Quit"
+
+[node name="killslabel" type="Label" parent="gameended"]
+offset_left = 238.0
+offset_top = 115.0
+offset_right = 838.0
+offset_bottom = 299.0
+theme = ExtResource("5_vgmgn")
+theme_override_font_sizes/font_size = 30
+text = "You got zero bitches"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="donegenerating" from="." to="." method="_on_donegenerating"]
+[connection signal="darkswitch" from="player" to="." method="_on_player_darkswitch"]
+[connection signal="lightswitch" from="player" to="." method="_on_player_lightswitch"]
 [connection signal="body_entered" from="inbounds" to="." method="_on_inbounds_body_entered"]
 [connection signal="body_exited" from="inbounds" to="." method="_on_inbounds_body_exited"]
+[connection signal="pressed" from="gameended/play again" to="." method="_on_play_again_pressed"]
+[connection signal="pressed" from="gameended/Quit" to="." method="_on_quit_pressed"]
