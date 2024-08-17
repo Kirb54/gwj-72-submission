@@ -196,8 +196,9 @@ func bigswitch():
 	switchpart.emitting = true
 	lightswitch.emit()
 	cam.zoom = Vector2(2,2)
-	var inst = light.instantiate()
-	add_sibling(inst)
+	if gb.bright:
+		var inst = light.instantiate()
+		add_sibling(inst)
 	dark.hide()
 	small = false
 	var timebig = randi_range(1,3)
@@ -248,7 +249,11 @@ func hit(e):
 		Engine.time_scale = .5
 		timefreeze.start()
 		await timefreeze.timeout
-		var diffrence = Vector2(e.global_position.x+global_position.x,e.global_position.y+global_position.y)
+		var diffrence 
+		if e:
+			diffrence = Vector2(e.global_position.x+global_position.x,e.global_position.y+global_position.y)
+		else:
+			diffrence = Vector2(0,0)
 		var mathdif : Vector2
 		mathdif = abs(diffrence)
 		var findratio = mathdif.x + mathdif.y
