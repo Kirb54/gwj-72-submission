@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://durkxi6c18xm0"]
+[gd_scene load_steps=8 format=3 uid="uid://durkxi6c18xm0"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_3h44n"]
 [ext_resource type="PackedScene" uid="uid://k7wlfgeyghcd" path="res://tilesheet.tscn" id="1_45ar6"]
 [ext_resource type="PackedScene" uid="uid://b8prtbg5hpak" path="res://player.tscn" id="2_54ph8"]
+[ext_resource type="AudioStream" uid="uid://bk2bitdigy10h" path="res://sfx/death.mp3" id="2_xv4cs"]
 [ext_resource type="Texture2D" uid="uid://bdslij32a3l3i" path="res://assets/Water.png" id="4_4svhm"]
 [ext_resource type="Theme" uid="uid://b4ysa4bpqab1j" path="res://default.tres" id="5_vgmgn"]
 
@@ -12,6 +13,7 @@ size = Vector2(1066, 846)
 [node name="main" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_3h44n")
+deathsfx = ExtResource("2_xv4cs")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 

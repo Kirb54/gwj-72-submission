@@ -4,6 +4,12 @@ signal lightswitch
 signal darkswitch
 
 
+@export var hitsfx : AudioStream
+
+@export var tpsfx : AudioStream
+
+
+
 @onready var tptimer = $tptimer
 @onready var switchtimer = $switchtimer
 @onready var anim = $AnimatedSprite2D
@@ -131,6 +137,7 @@ func teleport():
 				tpy = -1
 		global_position.x = global_position.x + (tpdistance * tpx)
 		global_position.y = global_position.y + (tpdistance * tpy)
+		sfx.playsound(tpsfx)
 		tptimer.start()
 		await tptimer.timeout
 		cantp = true
@@ -249,6 +256,7 @@ func hit(e):
 		Engine.time_scale = .5
 		timefreeze.start()
 		await timefreeze.timeout
+		sfx.playsound(hitsfx)
 		var diffrence 
 		if e:
 			diffrence = Vector2(e.global_position.x+global_position.x,e.global_position.y+global_position.y)
@@ -291,6 +299,7 @@ func hitsomething():
 	Engine.time_scale = .5
 	timefreeze.start()
 	await timefreeze.timeout
+	
 	Engine.time_scale = 1
 	cam.offset = Vector2(0,0)
 

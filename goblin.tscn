@@ -1,7 +1,9 @@
-[gd_scene load_steps=43 format=3 uid="uid://bvt2g632wjhdf"]
+[gd_scene load_steps=45 format=3 uid="uid://bvt2g632wjhdf"]
 
 [ext_resource type="Script" path="res://goblin.gd" id="1_62t2h"]
 [ext_resource type="Texture2D" uid="uid://b7dv73p7wxta0" path="res://assets/Torch_Red.png" id="2_4bonk"]
+[ext_resource type="AudioStream" uid="uid://dv0ayvmpbwa35" path="res://sfx/enemyhit.mp3" id="2_wc57o"]
+[ext_resource type="AudioStream" uid="uid://bk2bitdigy10h" path="res://sfx/death.mp3" id="3_opwev"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b1o06"]
 atlas = ExtResource("2_4bonk")
@@ -281,6 +283,8 @@ scale = Vector2(0.6, 0.6)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_62t2h")
+hitsfx = ExtResource("2_wc57o")
+deathsfx = ExtResource("3_opwev")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_nk101")

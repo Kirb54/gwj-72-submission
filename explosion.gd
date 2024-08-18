@@ -1,5 +1,9 @@
 extends Area2D
 
+@export var explo = AudioStream
+
+
+
 @onready var part = $explosion
 @onready var selftimer = $Timer
 @onready var radius = $CollisionShape2D
@@ -7,6 +11,7 @@ extends Area2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	sfx.playsound(explo)
 	part.emitting = true
 	selftimer.start()
 

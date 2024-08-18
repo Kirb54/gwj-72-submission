@@ -1,5 +1,11 @@
 extends CharacterBody2D
 
+
+@export var hitsfx : AudioStream
+@export var deathsfx : AudioStream
+
+
+
 @onready var anim = $AnimatedSprite2D
 @onready var upbox = $upbox/CollisionShape2D
 @onready var downbox = $downbox/CollisionShape2D
@@ -173,6 +179,7 @@ func _on_leftbox_body_exited(body):
 
 func hit(p):
 	health -= 1
+	sfx.playsound(hitsfx)
 	p.hitsomething()
 	knocked = true
 	var diffrence = Vector2(p.global_position.x+global_position.x,p.global_position.y+global_position.y)
@@ -198,6 +205,7 @@ func hit(p):
 	
 	if health <= 0:
 		gb.kills += 1
+		sfx.playsound(deathsfx)
 		self.queue_free()
 
 

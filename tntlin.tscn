@@ -1,7 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://dd7221u0o4mpx"]
+[gd_scene load_steps=26 format=3 uid="uid://dd7221u0o4mpx"]
 
 [ext_resource type="Script" path="res://tntlin.gd" id="1_oiyse"]
 [ext_resource type="Texture2D" uid="uid://yn3bk24mu8ps" path="res://assets/TNT_Red.png" id="1_tql8o"]
+[ext_resource type="AudioStream" uid="uid://dv0ayvmpbwa35" path="res://sfx/enemyhit.mp3" id="2_48ioc"]
+[ext_resource type="AudioStream" uid="uid://bk2bitdigy10h" path="res://sfx/death.mp3" id="3_xcibt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3n18e"]
 atlas = ExtResource("1_tql8o")
@@ -147,6 +149,8 @@ scale = Vector2(0.6, 0.6)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_oiyse")
+hitsfx = ExtResource("2_48ioc")
+deathsfx = ExtResource("3_xcibt")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ja7gl")

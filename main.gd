@@ -2,6 +2,9 @@ extends Node2D
 
 signal donegenerating
 
+@export var deathsfx : AudioStream
+
+
 @onready var player = $player
 @onready var tnt = preload("res://tntlin.tscn")
 @onready var norm = preload("res://goblin.tscn")
@@ -61,9 +64,11 @@ func _on_inbounds_body_exited(body):
 
 
 func endgame():
+	sfx.playsound(deathsfx)
 	gameended.show()
-	get_tree().paused = true
 	killslabel.text = "you got " + str(gb.kills) + " kills"
+	get_tree().paused = true
+	
 
 
 func setenemeies(n):

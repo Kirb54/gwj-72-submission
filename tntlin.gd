@@ -1,5 +1,12 @@
 extends CharacterBody2D
 
+
+
+@export var hitsfx : AudioStream
+@export var deathsfx : AudioStream
+
+
+
 @onready var anim = $AnimatedSprite2D
 @onready var aimlesstimer = $aimlesstimer
 @onready var attacktimer = $attacktimer
@@ -128,6 +135,7 @@ func animations():
 
 func hit(p):
 	health -= 1
+	sfx.playsound(hitsfx)
 	if p.is_in_group('player'):
 		p.hitsomething()
 	knocked = true

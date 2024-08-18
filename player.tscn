@@ -1,7 +1,9 @@
-[gd_scene load_steps=55 format=3 uid="uid://b8prtbg5hpak"]
+[gd_scene load_steps=57 format=3 uid="uid://b8prtbg5hpak"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_yx62l"]
+[ext_resource type="AudioStream" uid="uid://3lsfqb53yorf" path="res://sfx/playerhit.wav" id="2_ffo5c"]
 [ext_resource type="Texture2D" uid="uid://bd24x7746xmqd" path="res://assets/Warrior_Purple.png" id="2_q0uw1"]
+[ext_resource type="AudioStream" uid="uid://db8q7xhvejt3w" path="res://sfx/tp.mp3" id="3_4uvnr"]
 [ext_resource type="Texture2D" uid="uid://dcp8bsghk8qi6" path="res://assets/Pawn_Purple.png" id="3_mg2r7"]
 [ext_resource type="FontFile" uid="uid://dpll3nki08syl" path="res://assets/PublicPixel.ttf" id="4_tlsip"]
 [ext_resource type="PackedScene" uid="uid://7c1al3bd3se1" path="res://dark.tscn" id="5_4id7p"]
@@ -361,6 +363,8 @@ point_count = 2
 texture_filter = 1
 scale = Vector2(0.6, 0.6)
 script = ExtResource("1_yx62l")
+hitsfx = ExtResource("2_ffo5c")
+tpsfx = ExtResource("3_4uvnr")
 
 [node name="timerlabel" type="Label" parent="."]
 offset_left = -39.0
